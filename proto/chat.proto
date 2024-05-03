@@ -1,0 +1,26 @@
+//syntax declaration specifying the version of the Protocol Buffers language syntax being used.
+syntax = "proto3";
+
+//You can specify the package that the messages in the file belong to. This helps in organizing and avoiding naming conflicts.
+package chat;
+option go_package = "grpc-node/basic/pb/messages";
+
+// Business Entities
+//The core of a proto file is the definition of messages. Messages are used to structure the data you want to serialize.
+message Message {
+  string   text = 1;  
+}
+
+service IChatService {
+  rpc SendMessage (stream SendMessageRequest) returns (stream SendMessageResponse);
+}
+
+// Communication Entities - Requests
+message SendMessageRequest {
+  Message message = 1;
+}
+
+// Communication Entities - Responses
+message SendMessageResponse {
+  Message message = 1;
+}
